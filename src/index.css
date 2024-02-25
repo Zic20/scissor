@@ -1,3 +1,11 @@
+:root {
+  --color-primary: #005AE2;
+  --color-primary-2: #0065FE;
+  --color-white: #FFFFFF;
+  --gradient-background: #1E3448;
+  scroll-behavior: smooth;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -11,13 +19,6 @@ body {
   font-family: 'Gilroy-Medium', sans-serif;
 }
 
-:root {
-  --color-primary: #005AE2;
-  --color-primary-2: #0065FE;
-  --color-white: #FFFFFF;
-  --gradient-background: #1E3448;
-  scroll-behavior: smooth;
-}
 
 a,
 a:link,
