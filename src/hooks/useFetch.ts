@@ -8,7 +8,10 @@ type RequestConfig = {
 const useFetch = () => {
   const [loading, setLoading] = useState<Boolean>(false);
   const [error, setError] = useState<Boolean>(false);
-  const baseURL = "https://shorts.zictracks.com/api";
+  const baseURL = "http://localhost/shorts/api/";
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
 
   const sendRequest = useCallback(
     async (requestConfig: RequestConfig, workWithData: (data: {}) => void) => {
@@ -17,6 +20,8 @@ const useFetch = () => {
       const response = await fetch(baseURL, {
         method: requestConfig.method,
         body: (requestConfig?.body) ? requestConfig.body : "",
+        headers: myHeaders,
+        redirect: "follow"
       });
 
       if (!response.ok) {

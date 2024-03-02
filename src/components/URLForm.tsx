@@ -16,7 +16,7 @@ const URLForm = () => {
 
     sendRequest(
       {
-        method: "GET",
+        method: "POST",
         body: JSON.stringify({ActualUrl: enteredURl})
       },
       (data) => {
