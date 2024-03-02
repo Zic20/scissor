@@ -1,9 +1,11 @@
 import { useCallback, useState } from "react";
-
+import PostResponse from "../modules/PostResponse";
 type RequestConfig = {
   method: string,
   body: string
 }
+
+
 
 const useFetch = () => {
   const [loading, setLoading] = useState<Boolean>(false);
@@ -14,7 +16,7 @@ const useFetch = () => {
   myHeaders.append("Content-Type", "application/json");
 
   const sendRequest = useCallback(
-    async (requestConfig: RequestConfig, workWithData: (data: {}) => void) => {
+    async (requestConfig: RequestConfig, workWithData: (data: PostResponse) => void) => {
 
       setLoading(true);
       const response = await fetch(baseURL, {
@@ -26,9 +28,10 @@ const useFetch = () => {
 
       if (!response.ok) {
         setError(true);
+        throw new Error("Network request returned and error");
       }
 
-      const data = await response.json();
+      const data: PostResponse = await response.json();
       workWithData(data);
       setLoading(false);
     },

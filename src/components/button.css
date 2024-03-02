@@ -2,6 +2,7 @@
     border: none;
     display: inline-block;
     font-family: 'Gilroy-Medium', sans-serif;
+    transition: all ease-in-out 0.3;
 }
 
 .btn-primary {
@@ -9,6 +10,9 @@
     color: #FFFFFF;
     border-radius: 20px;
     padding: .7rem 2rem;
+}
+.btn-primary:hover {
+    background-color: #0249b3;
 }
 
 .btn-secondary,
