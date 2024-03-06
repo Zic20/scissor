@@ -10,7 +10,7 @@ type RequestConfig = {
 const useFetch = () => {
   const [loading, setLoading] = useState<Boolean>(false);
   const [error, setError] = useState<Boolean>(false);
-  const baseURL = "http://localhost/shorts/api/";
+  const baseURL = "http://localhost/shorts/api/shorturl";
 
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");

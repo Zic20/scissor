@@ -1,14 +1,42 @@
-import {
-  Link,
-  Link2,
-  MousePointer
-} from "lucide-react";
+import { Link, Link2, MousePointer } from "lucide-react";
 import Nav from "../components/Nav";
 import DashboardCard from "../components/DashboardCard";
 import URLForm from "../components/URLForm";
 import LinkListItem from "../components/LinkListItem";
+import { useEffect, useState } from "react";
+import RecentLink from "../modules/RecentLink";
+import DashboardData from "../modules/DashboardData";
 
 const Dashboard = () => {
+  const [recentLinks, setRecentLinks] = useState<RecentLink[]>([]);
+  const [totalClicks, setTotalClicks] = useState(0);
+  const [totalLinks, setTotalLinks] = useState(0);
+  const [linksThisMonth, setLinksThisMonth] = useState(0);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch("http://localhost/shorts/api/dashboard");
+      if (!response.ok) {
+        alert("Something went wrong");
+        return;
+      }
+
+      const responseData: DashboardData = await response.json();
+      if (!responseData.status) {
+        alert("Something isn't right");
+        return;
+      }
+      const {
+        data: { RecentLinks, TotalClicks, LinksThisMonth, TotalLinks },
+      } = responseData;
+      setRecentLinks(RecentLinks);
+      setTotalClicks(TotalClicks);
+      setTotalLinks(TotalLinks);
+      setLinksThisMonth(LinksThisMonth);
+    }
+
+    fetchData();
+  }, []);
   return (
     <>
       <Nav />
@@ -16,21 +44,21 @@ const Dashboard = () => {
         <DashboardCard
           className="bg-gradient-to-bl from-cyan-200 to-cyan-400"
           heading="ALL URLS"
-          value={30}
+          value={totalLinks}
         >
           <Link className="text-black" />
         </DashboardCard>
         <DashboardCard
           className="bg-gradient-to-r from-violet-400 to-purple-300"
           heading="TOTAL CLICKS"
-          value={5}
+          value={totalClicks}
         >
           <MousePointer className="text-black" />
         </DashboardCard>
         <DashboardCard
           className="bg-gradient-to-r from-sky-400 to-blue-500"
           heading="LINKS ADDED THIS MONTH"
-          value={0}
+          value={linksThisMonth}
         >
           <Link2 className="text-black" />
         </DashboardCard>
@@ -46,9 +74,18 @@ const Dashboard = () => {
       <div className="lg:w-11/12 lg:rounded-md lg:mx-auto justify-between flex flex-wrap">
         <URLForm />
         <div className="lg:w-8/12 w-full border-black">
-          <LinkListItem/>
-          <LinkListItem/>
-          <LinkListItem/>
+          {recentLinks.map((recentLink) => {
+            const { ActualUrl, id, created_at, clicks, ShortUrl } = recentLink;
+            return (
+              <LinkListItem
+                key={id}
+                clicks={clicks}
+                ActualURl={ActualUrl}
+                date={created_at}
+                ShortUrl={ShortUrl}
+              />
+            );
+          })}
         </div>
       </div>
     </>
