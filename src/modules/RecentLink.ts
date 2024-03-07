@@ -1,5 +1,6 @@
 type RecentLink = {
     id: number;
+    Title: string;
     ActualUrl: string;
     UniqueIdentifier: string;
     ShortUrl: string;

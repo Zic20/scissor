@@ -75,10 +75,12 @@ const Dashboard = () => {
         <URLForm />
         <div className="lg:w-8/12 w-full border-black">
           {recentLinks.map((recentLink) => {
-            const { ActualUrl, id, created_at, clicks, ShortUrl } = recentLink;
+            const { Title, ActualUrl, id, created_at, clicks, ShortUrl } =
+              recentLink;
             return (
               <LinkListItem
                 key={id}
+                Title={Title}
                 clicks={clicks}
                 ActualURl={ActualUrl}
                 date={created_at}

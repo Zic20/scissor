@@ -1,13 +1,21 @@
 import { BarChart, Clipboard, QrCode, Share } from "lucide-react";
 import React from "react";
+import { DateTimeFormatOptions } from "intl";
 
 const LinkListItem: React.FC<{
+  Title: string;
   ActualURl: string;
   date: string;
   ShortUrl: string;
   clicks: number;
 }> = (props) => {
-  const { ActualURl, date, ShortUrl, clicks } = props;
+  const { Title, ActualURl, date, ShortUrl, clicks } = props;
+  const config: DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const formatedDate = new Date(date).toLocaleDateString("en-US", config);
 
   const isShareSupported = typeof navigator.share === "function";
 
@@ -22,10 +30,15 @@ const LinkListItem: React.FC<{
   };
   return (
     <div className="bg-white w-full rounded-md p-5 my-5">
-      <a href={ActualURl} target="__blank">
+      <h4 className="font-bold mb-4">{Title}</h4>
+      <a
+        className="text-blue-700 hover:text-blue-900"
+        href={ActualURl}
+        target="__blank"
+      >
         {ActualURl}
       </a>
-      <p>{date}</p>
+      <p>{formatedDate}</p>
       <hr className="my-3" />
       <div>
         <div>
@@ -34,7 +47,12 @@ const LinkListItem: React.FC<{
           </a>
           <div className=" mt-3 flex gap-3 justify-between">
             <div className="flex gap-4">
-              {isShareSupported && <Share onClick={handleShareUrl} />}
+              {isShareSupported && (
+                <Share
+                  className="hover:text-blue-800"
+                  onClick={handleShareUrl}
+                />
+              )}
               <Clipboard
                 className="hover:text-blue-800"
                 onClick={handleCopyToClipBoard}
@@ -53,6 +71,7 @@ const LinkListItem: React.FC<{
           </div>
         </div>
       </div>
+      {/* main div ends here */}
     </div>
   );
 };
