@@ -6,27 +6,41 @@ import Button from "./Button";
 const URLForm = () => {
   const [shortUrl, setShortUrl] = useState("");
   const urlRef = useRef<HTMLInputElement>(null);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const aliasRef = useRef<HTMLInputElement>(null);
+
   const { sendRequest } = useFetch();
 
   const onFormSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     const enteredURl = urlRef.current!.value;
+    const urlTitle = titleRef.current!.value;
+
     if (enteredURl?.trim().length === 0) {
       alert("Please enter a url");
       return;
     }
 
+    if (urlTitle?.trim().length === 0) {
+      alert("Please enter a Title");
+      return;
+    }
+
+    const requestBody = {
+      ActualUrl: enteredURl.trim(),
+      Title: urlTitle.trim(),
+      custom_alias: aliasRef.current?.value.trim(),
+    };
+
     const processData = (data: PostResponse): void => {
       const {
-        status,
         url: { ShortenedUrl },
       } = data;
       if (ShortenedUrl.length > 0) setShortUrl(ShortenedUrl);
-      console.log(status);
     };
 
     sendRequest(
-      { method: "POST", body: JSON.stringify({ ActualUrl: enteredURl }) },
+      { method: "POST", body: JSON.stringify(requestBody) },
       processData
     );
   };
@@ -34,10 +48,8 @@ const URLForm = () => {
     <form className="urlForm" onSubmit={onFormSubmitHandler}>
       <input ref={urlRef} id="url" type="url" placeholder="Paste URL here..." />
       <div>
-        <select>
-          <option selected>Choose Domain</option>
-        </select>
-        <input type="text" placeholder="Type Alias here" />
+        <input ref={titleRef} type="text" placeholder="Title" />
+        <input ref={aliasRef} type="text" placeholder="Type Alias here" />
       </div>
       <input type="url" value={shortUrl} name="" readOnly id="" />
       <Button className="btn-primary">
