@@ -1,8 +1,10 @@
 import "../components/nav.css";
 import Logo from "../assets/icons/logo.svg";
 import Button from "./Button";
+import { Link, useNavigate } from "react-router-dom";
 
 const Nav = () => {
+  const navigate = useNavigate();
   return (
     <nav className="nav">
       <a id="logo" href="#">
@@ -39,24 +41,31 @@ const Nav = () => {
             <a href="#faq">FAQs</a>
           </li>
           <li>
-            <a href="#faq">Login</a>
+            <Link to={"signin"}>Login</Link>
+          </li>
+          <li>
+            <Link to={"signup"}>Sign up</Link>
           </li>
         </ul>
       </div>
       <div>
         <Button
-          onclick={(event) => {
-            alert(event.type);
+          onclick={() => {
+            navigate("signin");
           }}
           className="btn-secondary"
         >
           Login
         </Button>
-        <Button onclick={(event) => {
-            alert(event.type);
-          }} className="btn-primary">Try for free</Button>
+        <Button
+          onclick={() => {
+            navigate("signup");
+          }}
+          className="btn-primary"
+        >
+          Try for free
+        </Button>
       </div>
-
     </nav>
   );
 };
