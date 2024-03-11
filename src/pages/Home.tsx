@@ -9,6 +9,7 @@ import QRCodes from "../assets/icons/four squares.svg";
 import DataAnalytics from "../assets/icons/barLine.svg";
 import PricingCard from "../components/PricingCard";
 import URLForm from "../components/URLForm";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -156,6 +157,7 @@ const Home = () => {
       <div id="formsection">
         <URLForm/>
       </div>
+      <Footer/>
     </>
   );
 };

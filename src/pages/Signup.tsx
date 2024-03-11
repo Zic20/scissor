@@ -1,7 +1,13 @@
-import React from "react";
+import Footer from "../components/Footer";
+import SignupForm from "../components/SignupForm"
 
 const Signup = () => {
-  return <div>Sign up</div>;
+  return (
+    <div className="bg-white">
+      <SignupForm/>
+      <Footer />
+    </div>
+  );
 };
 
 export default Signup;

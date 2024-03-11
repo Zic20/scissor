@@ -41,7 +41,7 @@ const Nav = () => {
             <a href="#faq">FAQs</a>
           </li>
           <li>
-            <Link to={"signin"}>Login</Link>
+            <Link className="d-none sm:d-block" to={"signin"}>Login</Link>
           </li>
           <li>
             <Link to={"signup"}>Sign up</Link>

@@ -1,4 +1,4 @@
-.urlForm {
+.form {
     background-color: #FFFFFF;
     border-radius: 5px;
     width: 29rem;
@@ -6,12 +6,12 @@
     padding: 2rem;
 }
 
-.urlForm input[type="url"] {
+.form input[type="url"] {
     width: 100%;
 }
 
-.urlForm input,
-.urlForm select {
+.form input,
+.form select {
     color: var(--color-primary-2);
     padding: 10px;
     border: 1px solid var(--color-primary-2);
@@ -20,32 +20,32 @@
 
 }
 
-.urlForm input::placeholder,
+.form input::placeholder,
 select::placeholder {
     color: var(--color-primary-2);
 }
 
-.urlForm input:focus,
+.form input:focus,
 select:focus {
     outline: none;
 }
 
 
-.urlForm button {
+.form button {
     width: 100%;
 }
 
-.urlForm div {
+.form div {
     display: flex;
     justify-content: space-between;
 }
 
-.urlForm div select,
+.form div select,
 input {
     width: 48%;
 }
 
-.urlForm .terms {
+.form .terms {
     margin-top: 1rem;
     color: #0065FE;
     font-size: 12px;

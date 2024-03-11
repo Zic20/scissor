@@ -1,9 +1,13 @@
-import React from 'react'
+import Footer from "../components/Footer";
+import LoginForm from "../components/LoginForm";
 
 const Login = () => {
   return (
-    <div>Login</div>
-  )
-}
+    <div className="bg-white">
+      <LoginForm />
+      <Footer />
+    </div>
+  );
+};
 
-export default Login
+export default Login;
