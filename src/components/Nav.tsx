@@ -5,11 +5,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../firebase/auth";
 import HomeNavItems from "./HomeNavItems";
 import { LogOut } from "lucide-react";
-import { Logout } from "@mui/icons-material";
+import { getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const Nav = () => {
   const navigate = useNavigate();
   const { authUser } = useAuth();
+
+  const onLogoutHandler = async () => {
+    const auth = getAuth();
+    try {
+      await auth.signOut();
+      navigate("/signin");
+    } catch (error) {
+      toast.error("Sign out failed.");
+    }
+  };
 
   return (
     <nav className="nav">
@@ -63,13 +74,8 @@ const Nav = () => {
         )}
 
         {authUser && (
-          <Button
-            onclick={() => {
-              navigate("signin");
-            }}
-            className="btn-primary flex "
-          >
-            Login
+          <Button onclick={onLogoutHandler} className="btn-primary flex ">
+            Logout
             <LogOut className="ml-3" />
           </Button>
         )}
