@@ -44,7 +44,7 @@ const SignupForm = () => {
         email,
         password
       );
-      if (userCredential.user) navigate("/");
+      if (userCredential.user) navigate("/dashboard");
     } catch (error) {
       toast.error("Invalid credentials");
     }
