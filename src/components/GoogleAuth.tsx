@@ -47,7 +47,7 @@ const GoogleAuth = () => {
 };
 
 async function getUserData(uuid: string) {
-  const response = await fetch(`http://localhost/shorts/api/users?key=${uuid}`);
+  const response = await fetch(`https://shorts.zictracks.com/api/users?key=${uuid}`);
   if (!response.ok) {
     return false;
   }
@@ -61,7 +61,7 @@ async function getUserData(uuid: string) {
 }
 
 async function storeUserData(data: User) {
-  const response = await fetch(`http://localhost/shorts/api/users`, {
+  const response = await fetch(`https://shorts.zictracks.com/api/users`, {
     method: "POST",
     body: JSON.stringify(data),
   });

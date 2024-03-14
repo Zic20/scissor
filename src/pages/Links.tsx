@@ -40,7 +40,7 @@ const Links = () => {
       }
       setIsLoading(true);
       const response = await fetch(
-        `http://localhost/shorts/api/shorturl?key=${authUser?.uid}`
+        `https://shorts.zictracks.com/api/shorturl?key=${authUser?.uid}`
       );
       if (!response.ok) {
         toast.error("Network error!");

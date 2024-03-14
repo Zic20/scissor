@@ -41,7 +41,7 @@ const Dashboard = () => {
       }
       setIsLoading(true);
       const response = await fetch(
-        `http://localhost/shorts/api/dashboard?key=${authUser?.uid}`
+        `https://shorts.zictracks.com/api/dashboard?key=${authUser?.uid}`
       );
       if (!response.ok) {
         toast.error("Network error");
