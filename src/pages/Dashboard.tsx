@@ -1,40 +1,56 @@
-import { Link, Link2, MousePointer } from "lucide-react";
-import Nav from "../components/Nav";
-import DashboardCard from "../components/DashboardCard";
-import URLForm from "../components/URLForm";
-import LinkListItem from "../components/LinkListItem";
+import { CircularProgress } from "@mui/material";
+import Dialog, { DialogProps } from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import { Link, Link2, MousePointer, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
-import RecentLink from "../modules/RecentLink";
-import DashboardData from "../modules/DashboardData";
-import { useAuth } from "../firebase/auth";
-import Button from "../components/Button";
-import { useNavigate } from "react-router";
 import { Link as NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
+import Button from "../components/Button";
+import DashboardCard from "../components/DashboardCard";
+import LinkListItem from "../components/LinkListItem";
+import Nav from "../components/Nav";
+import URLForm from "../components/URLForm";
+import { useAuth } from "../firebase/auth";
+import DashboardData from "../modules/DashboardData";
+import RecentLink from "../modules/RecentLink";
 
 const Dashboard = () => {
   const [recentLinks, setRecentLinks] = useState<RecentLink[]>([]);
   const [totalClicks, setTotalClicks] = useState(0);
   const [totalLinks, setTotalLinks] = useState(0);
   const [linksThisMonth, setLinksThisMonth] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scroll, setScroll] = useState<DialogProps["scroll"]>("paper");
   const { authUser } = useAuth();
-  const navigate = useNavigate();
+
+  const handleClickOpen = (scrollType: DialogProps["scroll"]) => () => {
+    setOpen(true);
+    setScroll(scrollType);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     async function fetchData() {
       if (!authUser?.uid) {
         return;
       }
+      setIsLoading(true);
       const response = await fetch(
         `http://localhost/shorts/api/dashboard?key=${authUser?.uid}`
       );
       if (!response.ok) {
-        alert("Something went wrong");
+        toast.error("Network error");
         return;
       }
 
       const responseData: DashboardData = await response.json();
       if (!responseData.status) {
-        alert("Something isn't right");
+        toast.error("Can't fetch data at the moment");
         return;
       }
       const {
@@ -44,6 +60,7 @@ const Dashboard = () => {
       setTotalClicks(TotalClicks);
       setTotalLinks(TotalLinks);
       setLinksThisMonth(LinksThisMonth);
+      setIsLoading(false);
     }
 
     fetchData();
@@ -83,25 +100,52 @@ const Dashboard = () => {
       </div>
 
       <div className="lg:w-11/12 lg:rounded-md lg:mx-auto justify-between flex flex-wrap">
-        <URLForm />
-        <div className="lg:w-8/12 w-full border-black">
-          {recentLinks.map((recentLink) => {
-            const { Title, ActualUrl, id, created_at, clicks, ShortUrl } =
-              recentLink;
-            return (
-              <LinkListItem
-                key={id}
-                Title={Title}
-                clicks={clicks}
-                ActualURl={ActualUrl}
-                date={created_at}
-                ShortUrl={ShortUrl}
-              />
-            );
-          })}
-          <NavLink className="btn w-36 btn-primary mx-auto block" to={"/links"}>
-            See More
-          </NavLink>
+        <Button
+          onclick={handleClickOpen("paper")}
+          className="btn-primary rounded-sm bg-black flex"
+        >
+          New Link <Plus className="ml-2" />
+        </Button>
+
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          scroll={scroll}
+          aria-labelledby="scroll-dialog-title"
+          aria-describedby="scroll-dialog-description"
+        >
+          <DialogTitle id="scroll-dialog-title">QR Code</DialogTitle>
+          <DialogContent dividers={scroll === "paper"}>
+            <URLForm className="w-full" />
+          </DialogContent>
+        </Dialog>
+        <div className=" w-full border-black">
+          {isLoading && recentLinks.length < 1 && (
+            <CircularProgress className="mt-5 block mx-auto" />
+          )}
+          {recentLinks.length > 0 &&
+            recentLinks.map((recentLink) => {
+              const { Title, ActualUrl, id, created_at, clicks, ShortUrl } =
+                recentLink;
+              return (
+                <LinkListItem
+                  key={id}
+                  Title={Title}
+                  clicks={clicks}
+                  ActualURl={ActualUrl}
+                  date={created_at}
+                  ShortUrl={ShortUrl}
+                />
+              );
+            })}
+          {!isLoading && recentLinks.length > 0 && (
+            <NavLink
+              className="btn w-36 btn-primary mx-auto block mb-5"
+              to={"/links"}
+            >
+              See More
+            </NavLink>
+          )}
         </div>
       </div>
     </>

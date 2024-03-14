@@ -3,7 +3,8 @@ import "../components/urlform.css";
 import useFetch from "../hooks/useFetch";
 import PostResponse from "../modules/PostResponse";
 import Button from "./Button";
-const URLForm = () => {
+import { toast } from "react-toastify";
+const URLForm: React.FC<{ className?: string }> = ({ className }) => {
   const [shortUrl, setShortUrl] = useState("");
   const urlRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
@@ -17,12 +18,12 @@ const URLForm = () => {
     const urlTitle = titleRef.current!.value;
 
     if (enteredURl?.trim().length === 0) {
-      alert("Please enter a url");
+      toast.info("Please enter a url");
       return;
     }
 
     if (urlTitle?.trim().length === 0) {
-      alert("Please enter a Title");
+      toast.info("Please enter a title");
       return;
     }
 
@@ -45,7 +46,7 @@ const URLForm = () => {
     );
   };
   return (
-    <form className="form" onSubmit={onFormSubmitHandler}>
+    <form className={`form ${className}`} onSubmit={onFormSubmitHandler}>
       <input ref={urlRef} id="url" type="url" placeholder="Paste URL here..." />
       <div>
         <input ref={titleRef} type="text" placeholder="Title" />

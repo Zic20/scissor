@@ -6,10 +6,16 @@ import RecentLink from "../modules/RecentLink";
 import { useAuth } from "../firebase/auth";
 import { toast } from "react-toastify";
 import { CircularProgress, Pagination } from "@mui/material";
-
+import Dialog, { DialogProps } from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import { Plus } from "lucide-react";
+import Button from "../components/Button";
 const Links = () => {
   const [recentLinks, setRecentLinks] = useState<RecentLink[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const [scroll, setScroll] = useState<DialogProps["scroll"]>("paper");
   const { authUser } = useAuth();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,6 +23,15 @@ const Links = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentLinks = recentLinks.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handleClickOpen = (scrollType: DialogProps["scroll"]) => () => {
+    setOpen(true);
+    setScroll(scrollType);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -47,7 +62,7 @@ const Links = () => {
   }, [authUser?.uid]);
 
   const handleChangePage = (
-    event: React.ChangeEvent<unknown>,
+    _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
     setCurrentPage(page);
@@ -57,11 +72,31 @@ const Links = () => {
       <Nav />
 
       <div className="lg:w-11/12 lg:rounded-md lg:mx-auto justify-between flex flex-wrap">
-        <URLForm />
-        <div className="lg:w-8/12 w-full border-black">
-          {isLoading && <CircularProgress className="mx-auto block" />}
+        <Button
+          onclick={handleClickOpen("paper")}
+          className="btn-primary rounded-sm bg-black flex"
+        >
+          New Link <Plus className="ml-2" />
+        </Button>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          scroll={scroll}
+          aria-labelledby="scroll-dialog-title"
+          aria-describedby="scroll-dialog-description"
+        >
+          <DialogTitle id="scroll-dialog-title">QR Code</DialogTitle>
+          <DialogContent dividers={scroll === "paper"}>
+            <URLForm className="w-full" />
+          </DialogContent>
+        </Dialog>
+        <div className="w-full border-black">
+          {isLoading && currentLinks.length < 1 && (
+            <CircularProgress className="mx-auto block mt-6" />
+          )}
 
           {currentLinks.length > 0 &&
+            !isLoading &&
             currentLinks.map((recentLink) => {
               const { Title, ActualUrl, id, created_at, clicks, ShortUrl } =
                 recentLink;
@@ -77,11 +112,14 @@ const Links = () => {
               );
             })}
 
-          <Pagination
-            count={Math.ceil(recentLinks.length / itemsPerPage)}
-            page={currentPage}
-            onChange={handleChangePage}
-          />
+          {currentLinks.length > 0 && !isLoading && (
+            <Pagination
+            className="mb-6"
+              count={Math.ceil(recentLinks.length / itemsPerPage)}
+              page={currentPage}
+              onChange={handleChangePage}
+            />
+          )}
         </div>
       </div>
     </>

@@ -137,7 +137,7 @@ const Home = () => {
 
         <div className="cta_buttons">
           <Button
-            onclick={(event) => {
+            onclick={(event: React.MouseEvent) => {
               console.log(event.type);
             }}
             className="btn-secondary-outline"
@@ -145,7 +145,7 @@ const Home = () => {
             Get Custom Pricing
           </Button>
           <Button
-            onclick={(event) => {
+            onclick={(event: React.MouseEvent) => {
               console.log(event.type);
             }}
             className="btn-primary"
@@ -155,9 +155,9 @@ const Home = () => {
         </div>
       </section>
       <div id="formsection">
-        <URLForm/>
+        <URLForm className="mx-auto" />
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
