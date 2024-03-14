@@ -1,6 +1,10 @@
 import { BarChart, Clipboard, QrCode, Share } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { DateTimeFormatOptions } from "intl";
+import Dialog, { DialogProps } from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import QrGenerator from "./QrGenerator";
 
 const LinkListItem: React.FC<{
   Title: string;
@@ -9,15 +13,38 @@ const LinkListItem: React.FC<{
   ShortUrl: string;
   clicks: number;
 }> = (props) => {
+  const [open, setOpen] = useState(false);
+  const [scroll, setScroll] = useState<DialogProps["scroll"]>("paper");
+
   const { Title, ActualURl, date, ShortUrl, clicks } = props;
   const config: DateTimeFormatOptions = {
     year: "numeric",
     month: "long",
     day: "numeric",
   };
+
   const formatedDate = new Date(date).toLocaleDateString("en-US", config);
 
   const isShareSupported = typeof navigator.share === "function";
+
+  const handleClickOpen = (scrollType: DialogProps["scroll"]) => () => {
+    setOpen(true);
+    setScroll(scrollType);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const descriptionElementRef = React.useRef<HTMLElement>(null);
+  React.useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [open]);
 
   const handleCopyToClipBoard = async () => {
     await navigator.clipboard.writeText(ShortUrl);
@@ -57,7 +84,7 @@ const LinkListItem: React.FC<{
                 className="hover:text-blue-800"
                 onClick={handleCopyToClipBoard}
               />
-              <QrCode />
+              <QrCode onClick={handleClickOpen("paper")} />
             </div>
             <div className="border border-blue-700 flex p-2 rounded text-blue-800 font-bold">
               <BarChart />
@@ -72,6 +99,19 @@ const LinkListItem: React.FC<{
         </div>
       </div>
       {/* main div ends here */}
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+      >
+        <DialogTitle id="scroll-dialog-title">QR Code</DialogTitle>
+        <DialogContent dividers={scroll === "paper"}>
+          <QrGenerator url={ShortUrl} fileName="Qr_Code" qrCodeSize={700} />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

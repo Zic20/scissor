@@ -45,7 +45,7 @@ const URLForm = () => {
     );
   };
   return (
-    <form className="urlForm" onSubmit={onFormSubmitHandler}>
+    <form className="form" onSubmit={onFormSubmitHandler}>
       <input ref={urlRef} id="url" type="url" placeholder="Paste URL here..." />
       <div>
         <input ref={titleRef} type="text" placeholder="Title" />

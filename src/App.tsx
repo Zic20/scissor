@@ -7,23 +7,33 @@ import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Links from "./pages/Links";
+import ErrorBoundary from "./components/ErrorBoundary";
+import NotFound from "./pages/NotFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+    errorElement: <h1>Oops</h1>,
   },
   { path: "signup", element: <Signup /> },
   { path: "signin", element: <Login /> },
   { path: "dashboard", element: <Dashboard /> },
+  {
+    path: "links",
+    element: <Links />,
+  },
+  {path: "/*", element: <NotFound/>}
 ]);
 
 function App() {
   return (
     <>
-      {/* <Home/> */}
       <AuthUserProvider>
-        <RouterProvider router={router} />
+        <ErrorBoundary>
+          <RouterProvider router={router} />
+        </ErrorBoundary>
         <ToastContainer />
       </AuthUserProvider>
     </>

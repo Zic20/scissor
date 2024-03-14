@@ -6,16 +6,27 @@ import LinkListItem from "../components/LinkListItem";
 import { useEffect, useState } from "react";
 import RecentLink from "../modules/RecentLink";
 import DashboardData from "../modules/DashboardData";
+import { useAuth } from "../firebase/auth";
+import Button from "../components/Button";
+import { useNavigate } from "react-router";
+import { Link as NavLink } from "react-router-dom";
 
 const Dashboard = () => {
   const [recentLinks, setRecentLinks] = useState<RecentLink[]>([]);
   const [totalClicks, setTotalClicks] = useState(0);
   const [totalLinks, setTotalLinks] = useState(0);
   const [linksThisMonth, setLinksThisMonth] = useState(0);
+  const { authUser } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost/shorts/api/dashboard");
+      if (!authUser?.uid) {
+        return;
+      }
+      const response = await fetch(
+        `http://localhost/shorts/api/dashboard?key=${authUser?.uid}`
+      );
       if (!response.ok) {
         alert("Something went wrong");
         return;
@@ -36,7 +47,7 @@ const Dashboard = () => {
     }
 
     fetchData();
-  }, []);
+  }, [authUser?.uid]);
   return (
     <>
       <Nav />
@@ -88,6 +99,9 @@ const Dashboard = () => {
               />
             );
           })}
+          <NavLink className="btn w-36 btn-primary mx-auto block" to={"/links"}>
+            See More
+          </NavLink>
         </div>
       </div>
     </>

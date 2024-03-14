@@ -16,7 +16,19 @@ const GoogleAuth = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      console.log(user);
+      if (user) {
+        const userData = await getUserData(user.uid);
+        if (!userData) {
+          const userInfo: User = {
+            Email: user.email,
+            Name: user.displayName,
+            uuid: user.uid,
+            photo_url: user?.photoURL,
+          };
+          const userStored = await storeUserData(userInfo);
+          console.log(userStored);
+        }
+      }
       navigate("/dashboard");
     } catch (error) {
       console.log(error);
@@ -34,4 +46,35 @@ const GoogleAuth = () => {
   );
 };
 
+async function getUserData(uuid: string) {
+  const response = await fetch(`http://localhost/shorts/api/users?key=${uuid}`);
+  if (!response.ok) {
+    return false;
+  }
+
+  const responseData = await response.json();
+  if (!responseData.status) {
+    return false;
+  }
+
+  return responseData.data;
+}
+
+async function storeUserData(data: User) {
+  const response = await fetch(`http://localhost/shorts/api/users`, {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    return false;
+  }
+
+  const responseData = await response.json();
+  if (!responseData.status) {
+    return false;
+  }
+
+  return responseData.data;
+}
 export default GoogleAuth;

@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import PostResponse from "../modules/PostResponse";
+import { useAuth } from "../firebase/auth";
 type RequestConfig = {
   method: string,
   body: string
@@ -10,7 +11,8 @@ type RequestConfig = {
 const useFetch = () => {
   const [loading, setLoading] = useState<Boolean>(false);
   const [error, setError] = useState<Boolean>(false);
-  const baseURL = "http://localhost/shorts/api/shorturl";
+  const {authUser} = useAuth();
+  const baseURL = `http://localhost/shorts/api/shorturl?key=${authUser?.uid}`;
 
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");

@@ -1,10 +1,12 @@
 import { QRCodeCanvas } from "qrcode.react";
-import { QrCode,Share } from "lucide-react";
+import {Share } from "lucide-react";
+import { Download } from "@mui/icons-material";
 const QrGenerator: React.FC<{
   url: string;
   qrCodeSize: number;
   fileName: string;
 }> = (props) => {
+  console.log(props.url);
   const handleDownloadClick = () => {
     const canvas = document.querySelector("canvas");
     const image = canvas?.toDataURL("image/png");
@@ -55,7 +57,7 @@ const QrGenerator: React.FC<{
           onClick={handleDownloadClick}
           className="text-white bg-black p-2 rounded-sm"
         >
-          <QrCode className="ml-1 font-thin"/>
+          Download <Download/>
         </button>
         <button
           onClick={handleShareClick}
