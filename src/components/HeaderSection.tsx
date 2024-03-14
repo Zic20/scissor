@@ -2,7 +2,9 @@ import "../components/headerSection.css";
 import LinkIcon from "../assets/icons/Frame 1000001716.svg";
 import Shape1 from "../assets/images/Vector 2.svg";
 import Button from "./Button";
+import { useNavigate } from "react-router";
 const HeaderSection = () => {
+  const navigate = useNavigate();
   return (
     <header id="showcase">
       <h1 className="showcase_header">
@@ -20,8 +22,8 @@ const HeaderSection = () => {
 
       <div className="cta_buttons">
         <Button
-          onclick={(event) => {
-            alert(event.type);
+          onclick={() => {
+            navigate("/signup");
           }}
           className="btn-primary"
         >
