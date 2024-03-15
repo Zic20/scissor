@@ -23,6 +23,7 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState<DialogProps["scroll"]>("paper");
+
   const { authUser } = useAuth();
 
   const handleClickOpen = (scrollType: DialogProps["scroll"]) => () => {
@@ -65,6 +66,23 @@ const Dashboard = () => {
 
     fetchData();
   }, [authUser?.uid]);
+
+  const addToList = (data: RecentLink) => {
+    setRecentLinks((prev) => {
+      return prev.concat(data);
+    });
+    setTotalLinks(totalLinks + 1);
+    setLinksThisMonth(linksThisMonth + 1);
+  };
+
+  const onDeleteHandler = (id: number) => {
+    const filteredLinks = recentLinks.filter((recentLink) => {
+      return recentLink.id !== id;
+    });
+
+    setRecentLinks(filteredLinks);
+  };
+
   return (
     <>
       <Nav />
@@ -116,7 +134,7 @@ const Dashboard = () => {
         >
           <DialogTitle id="scroll-dialog-title">QR Code</DialogTitle>
           <DialogContent dividers={scroll === "paper"}>
-            <URLForm className="w-full" />
+            <URLForm className="w-full" updateLinksList={addToList} />
           </DialogContent>
         </Dialog>
         <div className=" w-full border-black">
@@ -130,11 +148,13 @@ const Dashboard = () => {
               return (
                 <LinkListItem
                   key={id}
+                  id={id}
                   Title={Title}
                   clicks={clicks}
                   ActualURl={ActualUrl}
                   date={created_at}
                   ShortUrl={ShortUrl}
+                  handleDelete={onDeleteHandler}
                 />
               );
             })}

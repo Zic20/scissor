@@ -1,9 +1,13 @@
 type PostResponse = {
     status: boolean,
     url: {
-        Title: string,
-        ActualUrl: string,
-        ShortenedUrl: string
+        id: number;
+        Title: string;
+        ActualUrl: string;
+        UniqueIdentifier: string;
+        ShortUrl: string;
+        created_at: string;
+        clicks: number;
     }
 };
 

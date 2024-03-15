@@ -61,6 +61,20 @@ const Links = () => {
     fetchData();
   }, [authUser?.uid]);
 
+  const onDeleteHandler = (id: number) => {
+    const filteredLinks = recentLinks.filter((recentLink) => {
+      return recentLink.id !== id;
+    });
+
+    setRecentLinks(filteredLinks);
+  };
+
+  const addToList = (data: RecentLink) => {
+    setRecentLinks((prev) => {
+      return prev.concat(data);
+    });
+  };
+
   const handleChangePage = (
     _event: React.ChangeEvent<unknown>,
     page: number
@@ -87,7 +101,7 @@ const Links = () => {
         >
           <DialogTitle id="scroll-dialog-title">QR Code</DialogTitle>
           <DialogContent dividers={scroll === "paper"}>
-            <URLForm className="w-full" />
+            <URLForm className="w-full" updateLinksList={addToList} />
           </DialogContent>
         </Dialog>
         <div className="w-full border-black">
@@ -102,19 +116,21 @@ const Links = () => {
                 recentLink;
               return (
                 <LinkListItem
+                  id={id}
                   key={id}
                   Title={Title}
                   clicks={clicks}
                   ActualURl={ActualUrl}
                   date={created_at}
                   ShortUrl={ShortUrl}
+                  handleDelete={onDeleteHandler}
                 />
               );
             })}
 
           {currentLinks.length > 0 && !isLoading && (
             <Pagination
-            className="mb-6"
+              className="mb-6"
               count={Math.ceil(recentLinks.length / itemsPerPage)}
               page={currentPage}
               onChange={handleChangePage}

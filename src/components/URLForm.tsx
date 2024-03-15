@@ -5,7 +5,11 @@ import PostResponse from "../modules/PostResponse";
 import Button from "./Button";
 import { toast } from "react-toastify";
 import { Magic } from "react-bootstrap-icons";
-const URLForm: React.FC<{ className?: string }> = ({ className }) => {
+import RecentLink from "../modules/RecentLink";
+const URLForm: React.FC<{
+  className?: string;
+  updateLinksList?: (data: RecentLink) => void;
+}> = ({ className, updateLinksList }) => {
   const [shortUrl, setShortUrl] = useState("");
   const urlRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
@@ -36,9 +40,12 @@ const URLForm: React.FC<{ className?: string }> = ({ className }) => {
 
     const processData = (data: PostResponse): void => {
       const {
-        url: { ShortenedUrl },
+        url: { ShortUrl },
       } = data;
-      if (ShortenedUrl.length > 0) setShortUrl(ShortenedUrl);
+      if (ShortUrl.length > 0) {
+        setShortUrl(ShortUrl);
+        if (updateLinksList) updateLinksList(data.url);
+      }
     };
 
     sendRequest(
@@ -55,7 +62,7 @@ const URLForm: React.FC<{ className?: string }> = ({ className }) => {
       </div>
       <input type="url" value={shortUrl} name="" readOnly id="" />
       <Button className="btn-primary">
-        Trim URL &nbsp; <Magic className="inline -mt-1"/>
+        Trim URL &nbsp; <Magic className="inline -mt-1" />
       </Button>
       <p className="terms">
         By clicking TrimURL, I agree to the <strong>Terms of Service</strong>,

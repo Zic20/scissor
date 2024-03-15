@@ -1,22 +1,30 @@
-import { BarChart, Clipboard, QrCode, Share } from "lucide-react";
-import React, { useState } from "react";
-import { DateTimeFormatOptions } from "intl";
+import DialogActions, { DialogContentText } from "@mui/material";
 import Dialog, { DialogProps } from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import { DateTimeFormatOptions } from "intl";
+import { BarChart, Clipboard, QrCode, Share, Trash2Icon } from "lucide-react";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { useAuth } from "../firebase/auth";
+import Button from "./Button";
 import QrGenerator from "./QrGenerator";
 
 const LinkListItem: React.FC<{
+  id: number;
   Title: string;
   ActualURl: string;
   date: string;
   ShortUrl: string;
   clicks: number;
+  handleDelete: (id: number) => void;
 }> = (props) => {
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState<DialogProps["scroll"]>("paper");
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const { authUser } = useAuth();
 
-  const { Title, ActualURl, date, ShortUrl, clicks } = props;
+  const { id, Title, ActualURl, date, ShortUrl, clicks } = props;
   const config: DateTimeFormatOptions = {
     year: "numeric",
     month: "long",
@@ -32,8 +40,34 @@ const LinkListItem: React.FC<{
     setScroll(scrollType);
   };
 
-  const handleClose = () => {
+  const handleClose = (event: React.MouseEvent) => {
     setOpen(false);
+  };
+
+  const setDeleteDialogVisibility = () => {
+    setOpenDeleteDialog(!openDeleteDialog);
+  };
+
+  const oneDeleteHandler = async () => {
+    const response = await fetch(
+      `https://shorts.zictracks.com/api/shorturl/${id}?key=${authUser?.uid}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (!response.ok) {
+      toast.error("Network error. Please try again");
+      return;
+    }
+
+    const responseData = await response.json();
+    if (!responseData.status) {
+      toast.error("Can't delete link at the moment. Please try later");
+      return;
+    }
+
+    props.handleDelete(id);
   };
 
   const descriptionElementRef = React.useRef<HTMLElement>(null);
@@ -85,6 +119,7 @@ const LinkListItem: React.FC<{
                 onClick={handleCopyToClipBoard}
               />
               <QrCode onClick={handleClickOpen("paper")} />
+              <Trash2Icon onClick={setDeleteDialogVisibility} />
             </div>
             <div className="border border-blue-700 flex p-2 rounded text-blue-800 font-bold">
               <BarChart />
@@ -111,6 +146,31 @@ const LinkListItem: React.FC<{
         <DialogContent dividers={scroll === "paper"}>
           <QrGenerator url={ShortUrl} fileName="Qr_Code" qrCodeSize={700} />
         </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={openDeleteDialog}
+        onClose={setDeleteDialogVisibility}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Delete link"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete this link? Deleted links cannot be
+            recovered.
+          </DialogContentText>
+        </DialogContent>
+        <div className="cta_buttons ml-2">
+          <Button className="btn-secondary text-red-700" onclick={setDeleteDialogVisibility}>
+            Disagree
+          </Button>
+          <Button className="btn-primary py-2" onclick={oneDeleteHandler}>
+            Agree
+          </Button>
+        </div>
       </Dialog>
     </div>
   );
