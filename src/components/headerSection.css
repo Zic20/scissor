@@ -11,16 +11,16 @@
 #showcase .info {
     width: 47%;
     margin: auto;
-    margin-top: 2rem;
-    margin-bottom: 3rem;
+    margin-top: 1.7rem;
+    margin-bottom: 1rem;
     line-height: 1.5;
 }
 
 #showcase #info_card_container {
     position: relative;
-    margin-top: 6rem;
-    margin-bottom: 4rem;
-    height: 20rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    height: 15rem;
 }
 
 #showcase #info_card {

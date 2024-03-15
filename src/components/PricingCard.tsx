@@ -1,22 +1,23 @@
-import "../components/PricingCard.css"
+import { Check2Circle } from "react-bootstrap-icons";
+import "../components/PricingCard.css";
 const PricingCard: React.FC<{
   title: string;
   price: string;
   description: string;
   features: string[];
-  className?: string 
-}> = (props) => {
+  className?: string;
+}> = ({ className, title, price, description, features }) => {
   return (
-    <div className={`card ${props?.className}`}>
-      <p className="title">{props.title}</p>
-      <h4 className="price">{props.price}</h4>
-      <p className="description">{props.description}</p>
+    <div className={`card ${className}`}>
+      <p className="title">{title}</p>
+      <h4 className="price">{price}</h4>
+      <p className="description">{description}</p>
 
       <ul>
-        {props.features.map((feature) => {
+        {features.map((feature) => {
           return (
-            <li key={feature}>
-              <i className="bi bi-check2-circle"></i> {feature}
+            <li className="" key={feature}>
+              <Check2Circle className="inline" /> {feature}
             </li>
           );
         })}

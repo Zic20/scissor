@@ -58,7 +58,7 @@ const Nav = () => {
               onclick={() => {
                 navigate("signin");
               }}
-              className="btn-secondary"
+              className="btn-secondary py-2"
             >
               Login
             </Button>
@@ -66,7 +66,7 @@ const Nav = () => {
               onclick={() => {
                 navigate("signup");
               }}
-              className="btn-primary"
+              className="btn-primary py-2"
             >
               Try for free
             </Button>
@@ -74,7 +74,7 @@ const Nav = () => {
         )}
 
         {authUser && (
-          <Button onclick={onLogoutHandler} className="btn-primary flex ">
+          <Button onclick={onLogoutHandler} className="btn-primary flex py-2">
             Logout
             <LogOut className="ml-3" />
           </Button>

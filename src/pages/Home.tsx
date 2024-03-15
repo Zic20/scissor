@@ -18,37 +18,37 @@ const Home = () => {
       <HeaderSection />
       <section id="myurls">
         <div className="head">
-          <h2>
+          <h2 className="font-bold text-3xl">
             One Stop. <br />
             Four <span className="text-primary">Possibilities</span>.
           </h2>
         </div>
         <div className="details">
           <div>
-            <h3>3M</h3>
+            <h3 className="font-bold text-2xl">3M</h3>
             <p>Active users</p>
           </div>
           <div>
-            <h3>60M</h3>
+            <h3 className="font-bold text-2xl">60M</h3>
             <p>
               Links & QR <br />
               codes created
             </p>
           </div>
           <div>
-            <h3>1B</h3>
+            <h3 className="font-bold text-2xl">1B</h3>
             <p>Clicked & Scanned connections</p>
           </div>
           <div>
-            <h3>300k</h3>
+            <h3 className="font-bold text-2xl">300k</h3>
             <p>App Integrations</p>
           </div>
         </div>
       </section>
       <section id="whyUs">
         <div className="head">
-          <h2>
-            Why choose <span className="text-primary">Scissors</span>
+          <h2 className="font-bold text-3xl mb-2 leading-10">
+            Why choose <br /> <span className="text-primary">Scissors</span>
           </h2>
           <p>
             Scissors is the hub of everything that has to do with your link
@@ -85,7 +85,7 @@ const Home = () => {
         </div>
       </section>
       <section id="pricing">
-        <h2>
+        <h2 className="font-bold text-3xl">
           <span className="has_sidebar">A </span>
           <span className="text-primary">price perfect</span> for your needs.
         </h2>
@@ -136,22 +136,8 @@ const Home = () => {
         </div>
 
         <div className="cta_buttons">
-          <Button
-            onclick={(event: React.MouseEvent) => {
-              console.log(event.type);
-            }}
-            className="btn-secondary-outline"
-          >
-            Get Custom Pricing
-          </Button>
-          <Button
-            onclick={(event: React.MouseEvent) => {
-              console.log(event.type);
-            }}
-            className="btn-primary"
-          >
-            Select Pricing
-          </Button>
+          <Button className="btn-secondary-outline py-2">Get Custom Pricing</Button>
+          <Button className="btn-primary py-2">Select Pricing</Button>
         </div>
       </section>
       <div id="formsection">

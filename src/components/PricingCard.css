@@ -7,7 +7,7 @@
 }
 
 .card:hover{
-    transform: scale(1.15);
+    transform: scale(1.05);
 }
 
 
@@ -47,9 +47,10 @@
     font-size: .9rem;
 }
 
-.card ul li i {
+.card ul li svg {
     color: var(--color-primary-2);
     margin-left: 5px;
+    margin-right: 5px;
 }
 
 .card.primary {
@@ -62,6 +63,41 @@
 
 }
 
-.card.primary li i {
+.card.primary li svg {
     color: var(--color-white);
+}
+
+@media screen and (max-width:700px) {
+    #pricing {
+        padding: 2rem;
+    }
+    
+   
+    
+    #pricing #pricing_cards {
+        display: block;
+    }
+    
+    #pricing #pricing_cards .card {
+        margin-bottom: 1rem;
+    }
+    
+    #pricing #pricing_cards .card:first-of-type {
+        border: 1px solid var(--color-primary-2);
+        border-radius: 5px;
+    }
+    
+    #pricing #pricing_cards .card:last-of-type {
+        border: 1px solid var(--color-primary-2);
+        border-radius: 5px;
+    }
+    
+    #pricing #pricing_cards .card .title {
+        margin-bottom: .7rem;
+    }
+    
+    #pricing #pricing_cards .card.primary {
+        height: 350px;
+        padding: 2rem;
+    }
 }

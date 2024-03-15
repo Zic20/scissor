@@ -26,7 +26,7 @@ const Footer = () => {
         <div className="p-2 w-3/4">
           <div className="flex justify-start gap-10 w-full mb-4">
             <div className="w-1/4">
-              <h4>Why Scissor?</h4>
+              <h4 className="font-bold text-lg">Why Scissor?</h4>
               <ul>
                 <li>Scissor 101</li>
                 <li>Integrations & API</li>
@@ -35,7 +35,7 @@ const Footer = () => {
             </div>
 
             <div className="w-1/4">
-              <h4>Solutions</h4>
+              <h4 className="font-bold text-lg">Solutions</h4>
               <ul>
                 <li>Social Media</li>
                 <li>Digital Marketing</li>
@@ -44,7 +44,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="w-1/4">
-              <h4>Products</h4>
+              <h4 className="font-bold text-lg">Products</h4>
               <ul>
                 <li>Link Management</li>
                 <li>QR Codes</li>
@@ -52,7 +52,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="w-1/4">
-              <h4>Company</h4>
+              <h4 className="font-bold text-lg">Company</h4>
               <ul>
                 <li>About Scissor</li>
                 <li>Careers</li>
@@ -66,7 +66,7 @@ const Footer = () => {
 
           <div className="flex justify-start gap-10 w-full">
           <div className="w-1/4">
-              <h4>Resources</h4>
+              <h4 className="font-bold text-lg">Resources</h4>
               <ul>
                 <li>Blog</li>
                 <li>Resource Library</li>
@@ -79,9 +79,9 @@ const Footer = () => {
               </ul>
             </div>
             <div className="w-1/4">
-              <h4>Features</h4>
+              <h4 className="font-bold text-lg">Features</h4>
               <ul>
-                <li>Brnded Links</li>
+                <li>Branded Links</li>
                 <li>Mobile Links</li>
                 <li>Campaign</li>
                 <li>Management & Analytics</li>
@@ -89,7 +89,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="w-1/4">
-              <h4>Legal</h4>
+              <h4 className="font-bold text-lg">Legal</h4>
               <ul>
                 <li>Privacy Policy</li>
                 <li>Cookie Policy</li>
@@ -101,7 +101,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="text-right">Term of Service | Security | Scissor 2023</p>
+      <p className="lg:text-right text-center">Term of Service | Security | Scissor 2023</p>
     </footer>
   );
 };

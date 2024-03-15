@@ -7,7 +7,7 @@ const HeaderSection = () => {
   const navigate = useNavigate();
   return (
     <header id="showcase">
-      <h1 className="showcase_header">
+      <h1 className="showcase_header font-bold text-4xl">
         Optimize Your Online Experience with Our <br />
         Advanced
         <span className="text-primary with-stroke"> URL Shortening </span>
@@ -25,7 +25,7 @@ const HeaderSection = () => {
           onclick={() => {
             navigate("/signup");
           }}
-          className="btn-primary"
+          className="btn-primary py-2"
         >
           Sign Up
         </Button>

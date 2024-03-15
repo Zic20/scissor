@@ -8,7 +8,7 @@
 
 #myurls {
     display: flex;
-    padding: 2rem 6rem;
+    padding: 2rem 4rem;
     align-items: center;
     justify-content: space-between;
     background-color: #F9FBFD;
@@ -24,10 +24,10 @@
     justify-content: space-between;
 }
 
-
+#myurls .details div { width: 20%}
 
 #whyUs {
-    padding: 4rem 6rem;
+    padding: 4rem 4rem;
     display: flex;
     justify-content: space-between;
 }
@@ -122,4 +122,11 @@
     background-size: contain, contain;
     background-repeat: no-repeat, no-repeat;
     padding: 6rem 0;
+}
+
+
+@media screen and (max-width:700px) {
+    #formsection form {
+        width: 80%;
+    }
 }

@@ -21,14 +21,14 @@ const HomeNavItems = () => {
       <li>
         <a href="#faq">FAQs</a>
       </li>
-      <li>
+      {/* <li>
         <Link className="d-none sm:d-block" to={"signin"}>
           Login
         </Link>
       </li>
       <li>
         <Link to={"signup"}>Sign up</Link>
-      </li>
+      </li> */}
     </ul>
   );
 };
