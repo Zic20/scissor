@@ -1,30 +1,49 @@
-# React + TypeScript + Vite
+# Scissors Link Shortener
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to Scissors Link Shortener – the premier tool for efficient link management. Our platform is designed for creating short and custom URLs, generating QR codes, and providing comprehensive data analytics.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **URL Shortening**: Quickly shorten URLs for your business, events, or personal use.
+- **Custom URLs**: Tailor your URL to your branding needs for an easily recognizable link.
+- **QR Codes**: Effortlessly generate QR codes to direct your audience right to your doorstep.
+- **Data Analytics**: Access in-depth analytics to monitor the performance and usage of your links.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To start using Scissors, follow these steps:
 
-- Configure the top-level `parserOptions` property like this:
+1. Visit [Scissors](https://scissor-shorts.netlify.app/)
+2. Choose the service you require (URL Shortening, Custom URL, QR Code generation).
+3. Follow the on-screen instructions to create your link or QR code.
+4. Access analytics through your dashboard.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Custom URLs
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Creating custom URLs is simple. Here's how:
+
+1. Add your url title.
+2. Type your custom alias.
+
+## Data Analytics
+
+To view your analytics:
+
+1. Go to the 'Analytics' section in your dashboard.
+2. Select the link or QR code you want to analyze.
+3. View the data and use it to inform your strategy.
+
+## Use Cases
+
+- Personal Branding
+- Business Marketing Campaigns
+- Event Promotions
+
+## Support
+
+For support or any questions, please reach out to us at [Support Email](izallyjr@gmail.com).
+
+## Privacy Policy
+
+We are dedicated to protecting your privacy. Read our privacy policy [here](link_to_privacy_policy).
+
