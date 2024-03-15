@@ -24,7 +24,9 @@
     justify-content: space-between;
 }
 
-#myurls .details div { width: 20%}
+#myurls .details div {
+    width: 20%
+}
 
 #whyUs {
     padding: 4rem 4rem;
@@ -128,5 +130,81 @@
 @media screen and (max-width:700px) {
     #formsection form {
         width: 80%;
+    }
+}
+
+#faq {
+    background-image: url(/assets/bg/Group\ 4.png), url(/assets/bg/Group\ 5.png);
+    background-position: right bottom, left top;
+    background-size: 300px, 250px;
+    background-repeat: no-repeat, no-repeat;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#faq h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#faq ul {
+    margin: auto;
+    width: 60%;
+    list-style-type: none;
+}
+
+#faq ul li {
+    padding: 1rem .5rem;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+}
+
+#faq ul li svg {
+    position: absolute;
+    top: 30%;
+    right: 0;
+    font-size: 1.3rem;
+}
+
+#faq ul li:first-of-type i {
+    position: absolute;
+    top: 10%;
+    right: 0;
+    font-size: 1.3rem;
+}
+
+#faq ul p {
+    padding-right: 3rem;
+    font-size: .97rem;
+}
+
+#cta {
+    background-color: var(--gradient-background);
+    background-image: url("../assets/bg/Group 7.png"), url("../assets/bg/Group 6.png");
+    background-blend-mode: screen;
+    background-position: right bottom, left top;
+    background-size: contain, contain;
+    background-repeat: no-repeat, no-repeat;
+    padding: 6rem 0;
+    color: #FFFFFF;
+    text-align: center;
+
+}
+
+#cta h2 {
+    margin-bottom: 2rem;
+}
+
+@media screen and (max-width:700px) {
+    #faq {
+        padding: 2rem;
+        display: block;
+
+    }
+
+    #faq ul {
+        width: 90%;
     }
 }

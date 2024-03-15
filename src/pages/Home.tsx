@@ -10,6 +10,7 @@ import DataAnalytics from "../assets/icons/barLine.svg";
 import PricingCard from "../components/PricingCard";
 import URLForm from "../components/URLForm";
 import Footer from "../components/Footer";
+import { Dash, Plus } from "react-bootstrap-icons";
 
 const Home = () => {
   return (
@@ -136,13 +137,84 @@ const Home = () => {
         </div>
 
         <div className="cta_buttons">
-          <Button className="btn-secondary-outline py-2">Get Custom Pricing</Button>
+          <Button className="btn-secondary-outline py-2">
+            Get Custom Pricing
+          </Button>
           <Button className="btn-primary py-2">Select Pricing</Button>
         </div>
       </section>
       <div id="formsection">
         <URLForm className="mx-auto" />
       </div>
+
+      <section id="faq">
+        <h2 className="font-bold text-2xl">
+          <span className="has_sidebar">F</span>AQs
+        </h2>
+        <ul>
+          <li>
+            <p>How does URL shortening work?</p>
+            <br />
+            <p>
+              URL shortening works by taking a long URL and creating a shorter,
+              condensed version that redirects to the original URL. When a user
+              clicks on the shortened link, they are redirected to the intended
+              destination.
+            </p>
+            <Dash />
+          </li>
+          <li>
+            <p>
+              Is it necessary to create an account to use the URL shortening
+              service?
+            </p>
+            <Plus />
+          </li>
+          <li>
+            <p>Are the shortened links permanent? Will they expire?</p>
+            <Plus />
+          </li>
+          <li>
+            <p>
+              Are there any limitations on the number of URLs I can shorten?
+            </p>
+            <Plus />
+          </li>
+          <li>
+            <p>
+              Can I customize the shortened URLs to reflect my brand or content?
+            </p>
+            <Plus />
+          </li>
+          <li>
+            <p>Can I track the performance of my shortened URLs?</p>
+            <Plus />
+          </li>
+          <li>
+            <p>
+              How secure is the URL shortening service? Are the shortened links
+              protected against spam or malicious activity?
+            </p>
+            <Plus />
+          </li>
+          <li>
+            <p>What is a QR code and what can it do?</p>
+            <Plus />
+          </li>
+          <li>
+            <p>
+              Is there an API available for integrating the URL shortening
+              service into my own applications or websites?
+            </p>
+            <Plus />
+          </li>
+        </ul>
+      </section>
+
+      <section id="cta">
+        <h2>Revolutionizing Link Optimization</h2>
+        <Button className="btn btn-primary py-2">Get Started</Button>
+      </section>
       <Footer />
     </>
   );
