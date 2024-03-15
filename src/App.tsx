@@ -10,6 +10,7 @@ import Signup from "./pages/Signup";
 import Links from "./pages/Links";
 import ErrorBoundary from "./components/ErrorBoundary";
 import NotFound from "./pages/NotFound";
+import ForgotPassword from "./pages/ForgotPassword";
 
 const router = createBrowserRouter([
   {
@@ -19,12 +20,13 @@ const router = createBrowserRouter([
   },
   { path: "signup", element: <Signup /> },
   { path: "signin", element: <Login /> },
+  { path: "forgotpassword", element: <ForgotPassword /> },
   { path: "dashboard", element: <Dashboard /> },
   {
     path: "links",
     element: <Links />,
   },
-  {path: "/*", element: <NotFound/>}
+  { path: "/*", element: <NotFound /> },
 ]);
 
 function App() {

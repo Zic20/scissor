@@ -66,10 +66,12 @@ const LoginForm = () => {
           required
           ref={passwordRef}
         />
-        <p className="text-right text-blue-500 text-sm mb-3">
-          Forgot your password?
+        <p className="text-right text-blue-500 text-sm my-2">
+          <Link to={"/forgotpassword"}>Forgot your password?</Link>
         </p>
-        <Button className="w-full btn-primary rounded-3xl mb-3">Log in</Button>
+        <Button className="w-full btn-primary rounded-3xl mb-3 mt-3">
+          Log in
+        </Button>
         <p className="text-center mb-2">
           Don't have an account?{" "}
           <Link className="text-blue-500" to={"/signup"}>
