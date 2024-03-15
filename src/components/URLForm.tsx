@@ -4,6 +4,7 @@ import useFetch from "../hooks/useFetch";
 import PostResponse from "../modules/PostResponse";
 import Button from "./Button";
 import { toast } from "react-toastify";
+import { Magic } from "react-bootstrap-icons";
 const URLForm: React.FC<{ className?: string }> = ({ className }) => {
   const [shortUrl, setShortUrl] = useState("");
   const urlRef = useRef<HTMLInputElement>(null);
@@ -54,7 +55,7 @@ const URLForm: React.FC<{ className?: string }> = ({ className }) => {
       </div>
       <input type="url" value={shortUrl} name="" readOnly id="" />
       <Button className="btn-primary">
-        Trim URL &nbsp; <i className="bi bi-magic"></i>
+        Trim URL &nbsp; <Magic className="inline -mt-1"/>
       </Button>
       <p className="terms">
         By clicking TrimURL, I agree to the <strong>Terms of Service</strong>,
