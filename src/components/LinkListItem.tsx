@@ -1,4 +1,4 @@
-import DialogActions, { DialogContentText } from "@mui/material";
+import { DialogContentText } from "@mui/material";
 import Dialog, { DialogProps } from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -40,7 +40,7 @@ const LinkListItem: React.FC<{
     setScroll(scrollType);
   };
 
-  const handleClose = (event: React.MouseEvent) => {
+  const handleClose = (_event: React.MouseEvent) => {
     setOpen(false);
   };
 
