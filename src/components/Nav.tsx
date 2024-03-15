@@ -39,15 +39,33 @@ const Nav = () => {
         {!authUser && <HomeNavItems />}
         {authUser && (
           <ul id="nav-list">
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/links">Links</Link>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
+            <Link
+              className="block  w-full text-center py-2 hover:bg-blue-700 hover:text-white"
+              to="/dashboard"
+            >
+              Dashboard
+            </Link>
+
+            <Link
+              className="block w-full text-center py-2 hover:bg-blue-700 hover:text-white"
+              to="/links"
+            >
+              Links
+            </Link>
+
+            <Link
+              className="block w-full text-center py-2 hover:bg-blue-700 hover:text-white"
+              to="/profile"
+            >
+              Profile
+            </Link>
+
+            <Link
+              className="block lg:hidden w-full text-center py-2 hover:bg-blue-700 hover:text-white"
+              to={"/signin"}
+            >
+              Logout
+            </Link>
           </ul>
         )}
       </div>

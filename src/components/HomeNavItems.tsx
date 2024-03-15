@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const HomeNavItems = () => {
   return (
     <ul id="nav-list">
@@ -19,14 +21,18 @@ const HomeNavItems = () => {
       <li>
         <a href="#faq">FAQs</a>
       </li>
-      {/* <li>
-        <Link className="d-none sm:d-block" to={"signin"}>
-          Login
-        </Link>
-      </li>
-      <li>
-        <Link to={"signup"}>Sign up</Link>
-      </li> */}
+      <Link
+        className="block md:hidden w-full text-center py-2 hover:bg-blue-700 hover:text-white"
+        to={"/signin"}
+      >
+        Login
+      </Link>
+      <Link
+        className="block md:hidden w-full text-center py-2 hover:bg-blue-700 hover:text-white"
+        to={"/signup"}
+      >
+        Sign up
+      </Link>
     </ul>
   );
 };
