@@ -129,14 +129,14 @@ const SignupForm = () => {
           ref={passwordRef}
         />
         <input
-          className="w-full mb-2"
+          className="w-full mb-4"
           type="password"
           name="password"
           placeholder="Retype Password"
           required
           ref={confirmPasswordRef}
         />
-        
+
         <Button className="w-full btn-primary rounded-3xl mb-3">
           Sign up with Email
         </Button>

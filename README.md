@@ -42,8 +42,3 @@ To view your analytics:
 ## Support
 
 For support or any questions, please reach out to us at [Support Email](izallyjr@gmail.com).
-
-## Privacy Policy
-
-We are dedicated to protecting your privacy. Read our privacy policy [here](link_to_privacy_policy).
-
