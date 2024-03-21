@@ -136,9 +136,7 @@ const SignupForm = () => {
           required
           ref={confirmPasswordRef}
         />
-        <p className="text-right text-blue-500 text-sm mb-3">
-          Forgot your password?
-        </p>
+        
         <Button className="w-full btn-primary rounded-3xl mb-3">
           Sign up with Email
         </Button>
