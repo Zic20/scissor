@@ -82,6 +82,7 @@ const LinkListItem: React.FC<{
 
   const handleCopyToClipBoard = async () => {
     await navigator.clipboard.writeText(ShortUrl);
+    toast.success("Copied to clipboard");
   };
 
   const handleShareUrl = async () => {
