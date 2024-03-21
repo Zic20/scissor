@@ -44,11 +44,55 @@ const SignupForm = () => {
         email,
         password
       );
-      if (userCredential.user) navigate("/dashboard");
+      if (userCredential.user) {
+        const userData = await getUserData(userCredential.user.uid);
+        if (!userData) {
+          const userInfo: User = {
+            Email: userCredential.user.email,
+            Name: userName,
+            uuid: userCredential.user.uid,
+            photo_url: userCredential.user?.photoURL,
+          };
+          await storeUserData(userInfo);
+          navigate("/dashboard");
+        }
+      }
     } catch (error) {
       toast.error("Invalid credentials");
     }
   };
+
+  async function getUserData(uuid: string) {
+    const response = await fetch(`https://shorts.zictracks.com/api/users?key=${uuid}`);
+    if (!response.ok) {
+      return false;
+    }
+
+    const responseData = await response.json();
+    if (!responseData.status) {
+      return false;
+    }
+
+    return responseData.data;
+  }
+
+  async function storeUserData(data: User) {
+    const response = await fetch(`https://shorts.zictracks.com/api/users`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      return false;
+    }
+
+    const responseData = await response.json();
+    if (!responseData.status) {
+      return false;
+    }
+
+    return responseData.data;
+  }
   return (
     <div className="authForm mx-auto pt-20 w-96 p-5 rounded-sm">
       <p className="text-center mb-2 text-gray-500">Sign up with:</p>

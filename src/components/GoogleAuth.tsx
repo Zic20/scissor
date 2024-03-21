@@ -25,8 +25,7 @@ const GoogleAuth = () => {
             uuid: user.uid,
             photo_url: user?.photoURL,
           };
-          const userStored = await storeUserData(userInfo);
-          console.log(userStored);
+          await storeUserData(userInfo);
         }
       }
       navigate("/dashboard");
