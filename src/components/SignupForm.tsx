@@ -1,6 +1,5 @@
 import Button from "./Button";
 import GoogleAuth from "./GoogleAuth";
-import AppleLogo from "../assets/icons/appleLogo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import "./loginForm.css";
 import { useRef } from "react";
