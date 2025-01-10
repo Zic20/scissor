@@ -30,7 +30,6 @@ const GoogleAuth = () => {
       }
       navigate("/dashboard");
     } catch (error) {
-      console.log(error);
       toast.error("Could not authenticate account. Please try again.");
     }
   };

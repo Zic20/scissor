@@ -6,7 +6,6 @@ const QrGenerator: React.FC<{
   qrCodeSize: number;
   fileName: string;
 }> = (props) => {
-  console.log(props.url);
   const handleDownloadClick = () => {
     const canvas = document.querySelector("canvas");
     const image = canvas?.toDataURL("image/png");

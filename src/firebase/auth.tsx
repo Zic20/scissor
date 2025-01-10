@@ -26,10 +26,6 @@ export default function useFirebaseAuth() {
         setIsLoading(true);
         user ? setAuthUser(user) : setAuthUser(null);
         setIsLoading(false);
-      },
-      (error) => {
-        console.log("Error", error);
-
       }
     );
     return () => unsubscribe();

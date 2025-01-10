@@ -57,10 +57,10 @@ const URLForm: React.FC<{
     <form className={`form ${className}`} onSubmit={onFormSubmitHandler}>
       <input ref={urlRef} id="url" type="url" placeholder="Paste URL here..." />
       <div>
-        <input ref={titleRef} type="text" placeholder="Title" />
-        <input ref={aliasRef} type="text" placeholder="Type Alias here" />
+        <input ref={titleRef} name="title" id="alias" type="text" placeholder="Title" />
+        <input ref={aliasRef} name="alias" id="alias" type="text" placeholder="Type Alias here" />
       </div>
-      <input type="url" value={shortUrl} name="" readOnly id="" />
+      <input type="url" value={shortUrl} name="url" readOnly id="url" />
       <Button className="btn-primary">
         Trim URL &nbsp; <Magic className="inline -mt-1" />
       </Button>
