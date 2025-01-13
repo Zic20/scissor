@@ -97,10 +97,6 @@ const SignupForm = () => {
       <p className="text-center mb-2 text-gray-500">Sign up with:</p>
       <div className="cta_buttons flex justify-center text-center">
         <GoogleAuth />
-        {/* <Button className="btn-primary flex mx-auto px-4 rounded-md">
-          <img src={AppleLogo} className="inline mr-1" alt="" />
-          Apple
-        </Button> */}
       </div>
 
       <form onSubmit={onSubmitHandler}>

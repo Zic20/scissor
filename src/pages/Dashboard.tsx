@@ -108,13 +108,7 @@ const Dashboard = () => {
         >
           <Link2 className="text-black" />
         </DashboardCard>
-        <DashboardCard
-          className="bg-gradient-to-r from-green-200 to-blue-500"
-          heading="ALL URLS"
-          value={30}
-        >
-          <Link className="text-black" />
-        </DashboardCard>
+       
       </div>
 
       <div className="lg:w-11/12 lg:rounded-md lg:mx-auto justify-between flex flex-wrap">

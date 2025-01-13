@@ -12,23 +12,6 @@ footer p {
     font-size: .89rem;
 }
 
-
-
-
-/* @media screen and (max-width: 810px) {
-    footer {
-        padding: 2rem;
-    }
-
-    footer .footer_data div {
-        width: 69%;
-    }
-
-    footer .footer_data div .body div {
-        width: 22%;
-    }
-} */
-
 @media screen and (max-width: 720px) {
     footer {
         background-size: 250px, 0;
