@@ -8,7 +8,6 @@ import CustomUrls from "../assets/icons/edit.svg";
 import QRCodes from "../assets/icons/four squares.svg";
 import DataAnalytics from "../assets/icons/barLine.svg";
 import PricingCard from "../components/PricingCard";
-import URLForm from "../components/URLForm";
 import Footer from "../components/Footer";
 import { Dash, Plus } from "react-bootstrap-icons";
 
@@ -144,7 +143,6 @@ const Home = () => {
         </div>
       </section>
       <div id="formsection">
-        <URLForm className="mx-auto" />
       </div>
 
       <section id="faq">

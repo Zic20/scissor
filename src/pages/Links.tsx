@@ -8,21 +8,21 @@ import { toast } from "react-toastify";
 import { CircularProgress, Pagination } from "@mui/material";
 import Dialog, { DialogProps } from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
 import { Plus } from "lucide-react";
 import Button from "../components/Button";
 const Links = () => {
   const [recentLinks, setRecentLinks] = useState<RecentLink[]>([]);
+  const [filteredLinks,setFilteredLinks] = useState<RecentLink[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState<DialogProps["scroll"]>("paper");
   const { authUser } = useAuth();
-
   const [currentPage, setCurrentPage] = useState(1);
+
   const itemsPerPage = 5;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentLinks = recentLinks.slice(indexOfFirstItem, indexOfLastItem);
+  let currentLinks = filteredLinks.slice(indexOfFirstItem, indexOfLastItem);
 
   const handleClickOpen = (scrollType: DialogProps["scroll"]) => () => {
     setOpen(true);
@@ -55,6 +55,7 @@ const Links = () => {
 
       const { urls } = responseData;
       setRecentLinks(urls);
+      setFilteredLinks(urls)
       setIsLoading(false);
     }
 
@@ -81,6 +82,12 @@ const Links = () => {
   ) => {
     setCurrentPage(page);
   };
+
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    let value = e.target.value;
+    let res = recentLinks.filter(link => link.Title.toLowerCase().includes(value))
+    setFilteredLinks(res)
+  }
   return (
     <>
       <Nav />
@@ -99,7 +106,6 @@ const Links = () => {
           aria-labelledby="scroll-dialog-title"
           aria-describedby="scroll-dialog-description"
         >
-          <DialogTitle id="scroll-dialog-title">QR Code</DialogTitle>
           <DialogContent dividers={scroll === "paper"}>
             <URLForm className="w-full" updateLinksList={addToList} />
           </DialogContent>
@@ -108,7 +114,7 @@ const Links = () => {
           {isLoading && currentLinks.length < 1 && (
             <CircularProgress className="mx-auto block mt-6" />
           )}
-
+          <input onChange={handleSearchInput} className="focus:outline-none rounded-sm p-2 mt-5 mb-5" type="text" name="" id="" />
           {currentLinks.length > 0 &&
             !isLoading &&
             currentLinks.map((recentLink) => {
@@ -131,7 +137,7 @@ const Links = () => {
           {currentLinks.length > 0 && !isLoading && (
             <Pagination
               className="mb-6"
-              count={Math.ceil(recentLinks.length / itemsPerPage)}
+              count={Math.ceil(filteredLinks.length / itemsPerPage)}
               page={currentPage}
               onChange={handleChangePage}
             />
